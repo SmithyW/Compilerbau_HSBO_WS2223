@@ -1,3 +1,5 @@
+package hsbo.ws202223.compilerbau;
+
 class TestScanner{
 	static public void main(String args[]){
 		NumScanner scanner;

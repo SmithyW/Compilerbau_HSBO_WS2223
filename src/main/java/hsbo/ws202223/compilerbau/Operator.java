@@ -1,7 +1,9 @@
+package hsbo.ws202223.compilerbau;
+
 /*
 	Operator.java
 	
-	Diese Klasse repräsentiert als Unterklasse von Semantic die
+	Diese Klasse reprï¿½sentiert als Unterklasse von Semantic die
 	semantische Funktion der Regeln mit dem Nonterminal
 	Operator auf der linken Seite. 
 

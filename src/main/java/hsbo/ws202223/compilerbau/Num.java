@@ -1,10 +1,12 @@
+package hsbo.ws202223.compilerbau;
+
 /*
 	Num.java
 	
 	Praktikum Algorithmen und Datenstrukturen
 	Beispiel zum Versuch 2
 	
-	Diese Klasse repräsentiert als Unterklasse von Semantic die
+	Diese Klasse reprï¿½sentiert als Unterklasse von Semantic die
 	semantische Funktion der Regeln mit dem Nonterminal
 	num auf der linken Seite. 
 
@@ -13,8 +15,8 @@
 class Num extends Semantic{
 	
 	//-------------------------------------------------------------------------
-	// Berechnet die nächst größere 10er Potenz von v
-	// Hilfsmethode für num.f
+	// Berechnet die nï¿½chst grï¿½ï¿½ere 10er Potenz von v
+	// Hilfsmethode fï¿½r num.f
 	//-------------------------------------------------------------------------
 	private int potenz(int v){
 		int p=10;

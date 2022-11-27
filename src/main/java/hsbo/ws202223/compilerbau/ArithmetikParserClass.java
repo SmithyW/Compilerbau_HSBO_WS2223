@@ -1,3 +1,5 @@
+package hsbo.ws202223.compilerbau;
+
 import java.io.*;
 
 /*
@@ -8,7 +10,7 @@ import java.io.*;
 	
 	Diese Java Klasse implementiert einen
 	einfachen Parser zum Erkennen arithmetischer
-	Ausdrücke der folgenden Grammatik:
+	Ausdrï¿½cke der folgenden Grammatik:
 	
 	program -> function program | function
 	function -> ident openPar parameterList closePar expression
@@ -26,14 +28,14 @@ import java.io.*;
 	expressionList -> expression komma expressionList | expression | Epsilon
 
 	
-	Epsilon steht hier für das "leere Wort"
+	Epsilon steht hier fï¿½r das "leere Wort"
 	
 	Der Parser verarbeitet den Token Strom, der durch den Scanner bei der
 	lexikalischen Analyse der Eingabe erzeugt wurde.
 	
 	Der Parser ist nach dem Prinzip des rekursiven Abstiegs programmiert,
 	d.h. jedes nicht terminale Symbol der Grammatik wird durch eine 
-	Methode in Java repräsentiert, die die jeweils anderen nicht terminalen
+	Methode in Java reprï¿½sentiert, die die jeweils anderen nicht terminalen
 	Symbole auf der rechten Seite der Grammatik Regeln ggf. auch rekursiv
 	aufruft.
 	
@@ -42,18 +44,18 @@ import java.io.*;
 	Eingabewert.
 	
 	Ist der zu parsende Ausdruck syntaktisch nicht korrekt, so werden 
-	über die Methode syntaxError() entsprechende Fehlermeldungen ausgegeben.
+	ï¿½ber die Methode syntaxError() entsprechende Fehlermeldungen ausgegeben.
 	
-	Zusätzlich werden den Methoden der Klasse neben der Rekursionstiefe auch
-	eine Referenz auf eine Instanz der Klasse SyntaxTree übergeben.
+	Zusï¿½tzlich werden den Methoden der Klasse neben der Rekursionstiefe auch
+	eine Referenz auf eine Instanz der Klasse SyntaxTree ï¿½bergeben.
 	
-	Über die Instanzen der Klasse SyntaxTree wird beim rekursiven Abstieg
+	ï¿½ber die Instanzen der Klasse SyntaxTree wird beim rekursiven Abstieg
 	eine konkreter Syntaxbaum des geparsten Ausdrucks aufgebaut.
 
 */
 
 public class ArithmetikParserClass extends NumScanner implements TokenList{
-	// Konstante für Ende der Eingabe
+	// Konstante fï¿½r Ende der Eingabe
 	public final char EOF=(char)255;
 	// Zeiger auf das aktuelle Eingabezeichen
 	private int pointer;
@@ -84,17 +86,23 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
 	boolean program(SyntaxTree sT){
-		byte [] identSet = {IDENT};
-		// program -> function ...
-		if (function(sT.insertSubtree(FUNCTION)))
-			// program -> function program
-			if (lookAhead(identSet))
-				return program(sT.insertSubtree(PROGRAM));
-			else
-			// program -> function (analog zum Epsilon Fall)
-				return true;
+            byte [] identSet = {IDENT};
+            // program -> function ...
+            if (function(sT.insertSubtree(FUNCTION)))
+                    // program -> function program
+                    if (lookAhead(identSet))
+                            return program(sT.insertSubtree(PROGRAM));
+                    else
+                    // program -> function (analog zum Epsilon Fall)
+                            return true;
+            return false; // #TODO
 	}//program
 	
+        
+        boolean function(SyntaxTree sT){
+            return true;
+            // #TODO
+        }
 	
 	//-------------------------------------------------------------------------
 	// expression -> term rightExpression
@@ -186,7 +194,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 		if (match(openParSet,sT))
 			//operator -> '(' expression ')' 
     		if (expression(sT.insertSubtree(EXPRESSION))){
-    			// Fallunterscheidung ermöglicht, den wichtigen Fehler einer
+    			// Fallunterscheidung ermï¿½glicht, den wichtigen Fehler einer
     			// fehlenden geschlossenen Klammer gesondert auszugeben
     			if(match(closeParSet,sT))
     				return true;
@@ -205,7 +213,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
    		else if (match(identSet,sT))
 			//operator -> ident   		
      		return true;
-     	// wenn das nicht möglich ...				
+     	// wenn das nicht mï¿½glich ...				
   		else{ //Syntaxfehler
 			syntaxError("Ziffer, Identifier oder Klammer auf erwartet"); 			
  			return false;
@@ -218,9 +226,9 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 
 	//-------------------------------------------------------------------------		
 	// Methode, die testet, ob das aktuele Token unter den Token
-	// ist, die als Parameter (matchSet) übergeben wurden.
-	// Ist das der Fall, so gibt match() true zurück und setzt den Eingabe-
-	// zeiger auf das nächste Zeichen, sonst wird false zurückgegeben.
+	// ist, die als Parameter (matchSet) ï¿½bergeben wurden.
+	// Ist das der Fall, so gibt match() true zurï¿½ck und setzt den Eingabe-
+	// zeiger auf das nï¿½chste Zeichen, sonst wird false zurï¿½ckgegeben.
 	//-------------------------------------------------------------------------
 	boolean match(byte [] matchSet, SyntaxTree sT){
 		SyntaxTree node;
@@ -228,7 +236,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 			if (tokenStream.get(pointer).token==matchSet[i]){
 				// gefundenes Token in den Syntaxbaum eintragen
 				sT.insertSubtree(tokenStream.get(pointer).token);
-				pointer++;	//Eingabepointer auf das nächste Zeichen setzen 
+				pointer++;	//Eingabepointer auf das nï¿½chste Zeichen setzen 
 				return true;
 			}
 		return false;
@@ -236,8 +244,8 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	
 	//-------------------------------------------------------------------------
 	//Methode, die testet, ob das auf das aktuelle Token folgende Token
-	//unter den Token ist, die als Parameter (aheadSet) übergeben wurden.
-	//Der Eingabepointer wird nicht verändert!
+	//unter den Token ist, die als Parameter (aheadSet) ï¿½bergeben wurden.
+	//Der Eingabepointer wird nicht verï¿½ndert!
 	//-------------------------------------------------------------------------
 	boolean lookAhead(byte [] aheadSet){
 		for (int i=0;i<aheadSet.length;i++)
@@ -266,7 +274,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 
 
 	//-------------------------------------------------------------------------	
-	// Methode zum korrekt eingerückten Ausgeben des Syntaxbaumes auf der 
+	// Methode zum korrekt eingerï¿½ckten Ausgeben des Syntaxbaumes auf der 
 	// Konsole 
 	//-------------------------------------------------------------------------
 	void ausgabe(String s, int t){

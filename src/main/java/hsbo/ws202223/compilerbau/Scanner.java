@@ -1,3 +1,5 @@
+package hsbo.ws202223.compilerbau;
+
 import java.util.*;
 import java.io.*;
 
@@ -24,17 +26,17 @@ abstract class Scanner implements TokenList{
 	}//InputCharacter
 	
 	//-------------------------------------------------------------------------		
-	// Datenstruktur für den Deterministischen Endlichen Automatens 
+	// Datenstruktur fï¿½r den Deterministischen Endlichen Automatens 
 	// (DEA).
-	// transitions gibt die Übergangstabelle von einem Zustand zum 
-	// nächsten an. Der Übergang von Zustand i zu Zustand j ist dann
-	// möglich, wenn auf der Eingabe ein Zeichen aus transitions[i][j]
+	// transitions gibt die ï¿½bergangstabelle von einem Zustand zum 
+	// nï¿½chsten an. Der ï¿½bergang von Zustand i zu Zustand j ist dann
+	// mï¿½glich, wenn auf der Eingabe ein Zeichen aus transitions[i][j]
 	// gelesen wird.
-	// Ein Übergang von Zustand 2 nach Zustand 3 soll z.B. beim Lesen eines
-	// ';' oder eines ',' möglich sein, dann ist transitions [2][3]={';',','}
+	// Ein ï¿½bergang von Zustand 2 nach Zustand 3 soll z.B. beim Lesen eines
+	// ';' oder eines ',' mï¿½glich sein, dann ist transitions [2][3]={';',','}
 	//
 	// token gibt den Token der Grammatik an, der einem Endzustand des DEA
-	// entsprechen soll. Im Beispiel oben wäre z.B. token[3]=TRENNZEICHEN bzw.
+	// entsprechen soll. Im Beispiel oben wï¿½re z.B. token[3]=TRENNZEICHEN bzw.
 	// DELIMITER.
 	//
 	//-------------------------------------------------------------------------		
@@ -52,7 +54,7 @@ abstract class Scanner implements TokenList{
 	
 	//-------------------------------------------------------------------------		
 	// Datenstruktur zum Ablegen der aus der Eingabedatei gewonnenen Token
-	// zusammen mit einem Hinweis auf die Eingabezeile für die bessere
+	// zusammen mit einem Hinweis auf die Eingabezeile fï¿½r die bessere
 	// Lokalisierung der Syntaxfehler durch den Parser
 	//-------------------------------------------------------------------------		
 
@@ -73,7 +75,7 @@ abstract class Scanner implements TokenList{
 	// Konstanten
 	//-------------------------------------------------------------------------		
 
-	// Konstante für Ende der Eingabe
+	// Konstante fï¿½r Ende der Eingabe
 	public final char EOF=(char)255;
 	
 	//-------------------------------------------------------------------------		
@@ -86,7 +88,7 @@ abstract class Scanner implements TokenList{
 	// Pointer auf aktuelles Zeichen aus inputStream
 	private int pointer;
 	
-	// Lexem für des aktuellen Tokens
+	// Lexem fï¿½r des aktuellen Tokens
 	private String lexem;
 
 	// Liste der durch den Scanner erkannten Token aus der Eingabe
@@ -102,16 +104,16 @@ abstract class Scanner implements TokenList{
 	
 	//-------------------------------------------------------------------------		
 	// Methode, die testet, ob das aktuele Eingabezeichen unter den Zeichen
-	// ist, die als Parameter (matchSet) übergeben wurden.
-	// Ist das der Fall, so gibt match() true zurück und setzt den Eingabe-
-	// zeiger auf das nächste Zeichen, sonst wird false zurückgegeben.
+	// ist, die als Parameter (matchSet) ï¿½bergeben wurden.
+	// Ist das der Fall, so gibt match() true zurï¿½ck und setzt den Eingabe-
+	// zeiger auf das nï¿½chste Zeichen, sonst wird false zurï¿½ckgegeben.
 	//-------------------------------------------------------------------------	
 	boolean match(char [] matchSet){
 		for (int i=0;i<matchSet.length;i++)
 			if (inputStream.get(pointer).character==matchSet[i]){
 				System.out.println("match:"+inputStream.get(pointer).character);
 				lexem=lexem+inputStream.get(pointer).character;
-				pointer++;	//Eingabepointer auf das nächste Zeichen setzen 
+				pointer++;	//Eingabepointer auf das nï¿½chste Zeichen setzen 
 				return true;		
 			}
 		return false;
@@ -130,7 +132,7 @@ abstract class Scanner implements TokenList{
 	}//lexicalError
 
 	//-------------------------------------------------------------------------
-	// Gibt den zum Zahlenwert passenden String des Tokentyps zurück
+	// Gibt den zum Zahlenwert passenden String des Tokentyps zurï¿½ck
 	// Wird in der entsprechenden Unterklasse, die den Scanner definiert
 	// und somit die Token festlegt implementiert
 	//-------------------------------------------------------------------------
@@ -158,7 +160,7 @@ abstract class Scanner implements TokenList{
 
 	//-------------------------------------------------------------------------			
 	// Methode zum zeichenweise Einlesen der Eingabe aus
-	// einer Eingabedatei mit dem übergebenen Namen.
+	// einer Eingabedatei mit dem ï¿½bergebenen Namen.
 	// Das Ende der Eingabe wird mit EOF markiert
 	//-------------------------------------------------------------------------		
 	boolean readInput(String name){
@@ -167,24 +169,24 @@ abstract class Scanner implements TokenList{
 		inputStream=new LinkedList <InputCharacter> ();
 		tokenStream=new LinkedList <Token>();
 		try{
-			FileReader f=new FileReader(name);
-			while(true){
-				c = f.read();
-				if (c== -1){
-					inputStream.addLast(new InputCharacter(EOF, l));
-					break;
-				}else if(((char)c)==' '){
-					// Leerzeichen überlesen
-				}else if (((char)c)=='\n'){
-					// carriage return überlesen und Zeilennummer hochzählen
-					l++;
-				}else if (c==13){
-					// linefeed überlesen
-				}else{
-					// Zeichen einlesen
-					inputStream.addLast(new InputCharacter((char)c, l));
-				}
-			} 
+                    FileReader f=new FileReader(name);
+                    while(true){
+                            c = f.read();
+                            if (c== -1){
+                                    inputStream.addLast(new InputCharacter(EOF, l));
+                                    break;
+                            }else if(((char)c)==' '){
+                                    // Leerzeichen ï¿½berlesen
+                            }else if (((char)c)=='\n'){
+                                    // carriage return ï¿½berlesen und Zeilennummer hochzï¿½hlen
+                                    l++;
+                            }else if (c==13){
+                                    // linefeed ï¿½berlesen
+                            }else{
+                                    // Zeichen einlesen
+                                    inputStream.addLast(new InputCharacter((char)c, l));
+                            }
+                    } 
 		}
 		catch(Exception e){
 			System.out.println("Fehler beim Dateizugriff: "+name);
@@ -199,18 +201,18 @@ abstract class Scanner implements TokenList{
 	//-------------------------------------------------------------------------		
 
 	//-------------------------------------------------------------------------
-	// Führt die lexikalische Analyse für den nächsten Token durch und gibt
-	// diesen zurück
+	// Fï¿½hrt die lexikalische Analyse fï¿½r den nï¿½chsten Token durch und gibt
+	// diesen zurï¿½ck
 	//-------------------------------------------------------------------------
 	boolean lexicalAnalysis(){
 		char [] EOFSet={EOF};
 		byte token=NO_TYPE;
-		// Eingabe Token für Token prüfen und gefundene Token in tokenStream
+		// Eingabe Token fï¿½r Token prï¿½fen und gefundene Token in tokenStream
 		// eintragen
 		while(!match(EOFSet)){
 			token = getNextToken();
 			System.out.println(getTokenString(token));
-			// falls kein gültiges Token gefunden wurde, lexikalische Analyse
+			// falls kein gï¿½ltiges Token gefunden wurde, lexikalische Analyse
 			// abbrechen
 			if (token==NO_TYPE)
 				return false;
@@ -219,27 +221,27 @@ abstract class Scanner implements TokenList{
 				tokenStream.
 				addLast(new Token(token,inputStream.get(pointer-1).line,lexem));
 		}//while
-		// Bei erfolgreichem Scannen, Token Strom mit EOF abschließen
+		// Bei erfolgreichem Scannen, Token Strom mit EOF abschlieï¿½en
 		tokenStream.addLast(new Token((byte)EOF,inputStream.get(pointer-1).line,"EOF"));
 		return true;
 	}//lexicalAnalysis
 	
 	//-------------------------------------------------------------------------
-	// Führt die lexikalische Analyse für den nächsten Token durch und gibt
-	// diesen zurück
+	// Fï¿½hrt die lexikalische Analyse fï¿½r den nï¿½chsten Token durch und gibt
+	// diesen zurï¿½ck
 	//-------------------------------------------------------------------------
 	byte getNextToken(){
-			// Variable, die angibt, ob ein Zustandsübregang des Automaten
+			// Variable, die angibt, ob ein Zustandsï¿½bregang des Automaten
 			// erfolgt ist
 			boolean transitionFound=false;
 			int actualState=0;
 			// aktuelles Lexem mit Leerstring initialisieren
 			lexem="";
-			// Schleife durchläuft die Zustände des DEA solange das aufgrund
-			// der Eingabe möglich ist
+			// Schleife durchlï¿½uft die Zustï¿½nde des DEA solange das aufgrund
+			// der Eingabe mï¿½glich ist
 			do{
 				// transitionFound vor jedem neuen Schleifendurchlauf
-				// zurücksetzen
+				// zurï¿½cksetzen
 				transitionFound=false;
 				// Folgezustand des DEA zu actualState ermitteln
 				for(int j=0;j<dea.transitions[actualState].length;j++)
@@ -252,7 +254,7 @@ abstract class Scanner implements TokenList{
 					}
 			}while(transitionFound);
 			// Wenn der DEA sich jetzt in einem Endzustand befindet,
-			// kann ein Token zurückgegeben werden
+			// kann ein Token zurï¿½ckgegeben werden
 			if ((dea.states[actualState]!=NOT_FINAL)&&(dea.states[actualState]!=START))
 				return dea.states[actualState];
 			else{

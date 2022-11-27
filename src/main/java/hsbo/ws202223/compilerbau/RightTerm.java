@@ -1,7 +1,9 @@
+package hsbo.ws202223.compilerbau;
+
 /*
 	RightTerm.java
 	
-	Diese Klasse repräsentiert als Unterklasse von Semantic die
+	Diese Klasse reprï¿½sentiert als Unterklasse von Semantic die
 	semantische Funktion der Regeln mit dem Nonterminal
 	rightTerm auf der linken Seite. 
 

@@ -1,8 +1,10 @@
+package hsbo.ws202223.compilerbau;
+
 /*
 	NunScanner.java
 	
-	Diese Klasse implementiert die Zustnde und Transitionstabelle eines DEA für 
-	Ziffernfolgen nach dem folgenden regulären Ausdruck:
+	Diese Klasse implementiert die Zustnde und Transitionstabelle eines DEA fï¿½r 
+	Ziffernfolgen nach dem folgenden regulï¿½ren Ausdruck:
 	
 													+
 	NUM := {'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'|'0'}
@@ -11,11 +13,11 @@
 class NumScanner extends Scanner{
 	
 	//-------------------------------------------------------------------------
-	// Konstruktor (Legt die Zustände und Transitionstabelle des DEA an)
+	// Konstruktor (Legt die Zustï¿½nde und Transitionstabelle des DEA an)
 	//-------------------------------------------------------------------------
 	
 	NumScanner(){
-		// Transitionstabelle zum regulären Ausdruck
+		// Transitionstabelle zum regulï¿½ren Ausdruck
 		//	    											+
 		// NUM := {'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'|'0'}
 		
@@ -35,13 +37,13 @@ class NumScanner extends Scanner{
 		/*DIV*/			{{}, {},					{},														{},			{},			{},		{},		{},		{},							{}	 						 },
 		/*NUM  */		{{}, {},					{},														{}, 		{},			{},		{},		{},		{},				{'1','2','3','4','5','6','7','8','9','0'}}};
 		//				-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		// Zustände zum DEA 
+		// Zustï¿½nde zum DEA 
 		byte states[]={START, KOMMA, IDENT, OPEN_PAR, CLOSE_PAR, PLUS, MINUS, MULT, DIV, NUM};
 		// Instanz des DEA anlegen
 		this.dea=new DEA(transitions, states);
 	}
 	
-	// Gibt den zum Zahlenwert passenden String des Tokentyps zurück
+	// Gibt den zum Zahlenwert passenden String des Tokentyps zurï¿½ck
 	// Implementierung der abstrakten Methode aus der Klasse Scanner
 	String getTokenString(byte token){
 		switch(token){
