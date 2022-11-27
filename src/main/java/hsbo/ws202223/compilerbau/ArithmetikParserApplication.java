@@ -22,12 +22,12 @@ class ArithmetikParserApplication implements TokenList{
 		// Anlegen des Wurzelknotens f�r den Syntaxbaum. Dem Konstruktor
 		// wid als Token das Startsymbol der Grammatik �bergeben
 		SyntaxTree parseTree = new SyntaxTree(EXPRESSION);
-		
+                
 		// Anlegen des Parsers als Instanz der Klasse ArithmetikParserClass
 		ArithmetikParserClass parser = new ArithmetikParserClass(parseTree);
 
 		// Einlesen der Datei 		
-		if (parser.readInput("testdatei_arithmetik.txt"))
+		if (parser.readInput("arithmetischer_ausdruck.txt"))
 			// lexikalische Analyse durchf�hren
 			if (parser.lexicalAnalysis())
 				//Aufruf des Parsers und Test, ob gesamte Eingabe gelesen

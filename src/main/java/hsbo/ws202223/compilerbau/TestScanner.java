@@ -4,7 +4,7 @@ class TestScanner{
 	static public void main(String args[]){
 		NumScanner scanner;
 		scanner = new NumScanner();
-		if (scanner.readInput("testdatei_arithmetik.txt")){
+		if (scanner.readInput("arithmetischer_ausdruck.txt")){
 			scanner.printInputStream();
 			if(scanner.lexicalAnalysis())
 				scanner.printTokenStream();
